@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
             preview = Preview.Builder()
                 .build()
 
+            imageCapture = ImageCapture.Builder()
+                .build()
+
             // Select back camera
             val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
@@ -71,8 +74,10 @@ class MainActivity : AppCompatActivity() {
 
                 // Bind use cases to camera
                 camera = cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview)
+                    this, cameraSelector, preview, imageCapture)
                 preview?.setSurfaceProvider(viewFinder.createSurfaceProvider())//camera?.cameraInfo
+
+
             } catch(exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
